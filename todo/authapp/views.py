@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from authapp.models import CustomUser
+from authapp.serializers import CustomUserModelSerializer
+
+
+class CustomUserModelViewSet(ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserModelSerializer
