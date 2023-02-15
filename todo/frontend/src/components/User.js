@@ -11,7 +11,7 @@ const UserItem = ({user}) => {
                 {user.last_name}
             </td>
             <td>
-                {user.email_address}
+                {user.email}
             </td>
         </tr>
     )
