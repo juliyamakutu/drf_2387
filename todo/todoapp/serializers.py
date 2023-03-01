@@ -1,11 +1,18 @@
 from rest_framework import serializers
+
+from authapp.serializers import CustomUserModelSerializer
 from .models import Todo, Project
 
 
-class TodoSerializer(serializers.ModelSerializer):
+class TodoReadSerializer(serializers.ModelSerializer):
+    created_by = serializers.StringRelatedField(source='created_by.username')
+    project = serializers.StringRelatedField(source='project.title')
+
     class Meta:
         model = Todo
         fields = (
+            'id',
+            'project',
             'title',
             'description',
             'created_at',
@@ -15,7 +22,35 @@ class TodoSerializer(serializers.ModelSerializer):
         )
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class TodoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = (
+            'project',
+            'title',
+            'description',
+            'created_by',
+            'completed',
+        )
+
+
+class ProjectReadSerializer(serializers.ModelSerializer):
+    todos = TodoReadSerializer(many=True, read_only=True)
+    users = CustomUserModelSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = (
+            'id',
+            'title',
+            'repo_url',
+            'description',
+            'users',
+            'todos',
+        )
+
+
+class ProjectCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = (
