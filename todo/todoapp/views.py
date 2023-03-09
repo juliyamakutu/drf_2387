@@ -21,7 +21,7 @@ class TwentyPageNumberPagination(PageNumberPagination):
 
 class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
-    pagination_class = TenPageNumberPagination
+    # pagination_class = TenPageNumberPagination
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -38,7 +38,7 @@ class ProjectModelViewSet(ModelViewSet):
 
 class TodoModelViewSet(ModelViewSet):
     queryset = Todo.objects.all()
-    pagination_class = TwentyPageNumberPagination
+    # pagination_class = TwentyPageNumberPagination
 
     def get_serializer_class(self):
         if self.action == 'create':
