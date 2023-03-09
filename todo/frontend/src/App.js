@@ -6,7 +6,7 @@ import UserList from './components/User.js'
 import ProjectList from './components/Project.js'
 import TodoList from './components/Todo.js'
 import UserTodoList from './components/UserTodo.js'
-import {HashRouter, Route, Link, Routes, Navigate} from 'react-router-dom'
+import {BrowserRouter, Route, Link, Routes, Navigate} from 'react-router-dom'
 
 
 const NotFound404 = ({ location }) => {
@@ -56,7 +56,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-      <HashRouter>
+      <BrowserRouter>
         <div>
         <nav>
           <ul className='main-nav'>
@@ -80,7 +80,7 @@ class App extends React.Component {
             <Route path="/users/:id" element={<UserTodoList todos={this.state.todos} /> } />
             <Route element={NotFound404} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </div>
     )
   }
