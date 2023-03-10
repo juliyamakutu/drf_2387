@@ -5,7 +5,7 @@ from .models import Todo, Project
 
 
 class TodoReadSerializer(serializers.ModelSerializer):
-    created_by = serializers.StringRelatedField(source='created_by.username')
+    created_by = CustomUserModelSerializer(read_only=True)
     project = serializers.StringRelatedField(source='project.title')
 
     class Meta:
