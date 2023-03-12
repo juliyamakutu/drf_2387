@@ -89,7 +89,18 @@ class App extends React.Component {
             <Route exact path='/login' element={<LoginForm />} />
             <Route path='/users' element={<Navigate to='/' />} />
             <Route path="/users/:id" element={<UserTodoList todos={this.state.todos} /> } />
-            <Route exact path='/login' render={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} />
+            {/* <Route exact path="/login" element={<LoginForm get_token={this.get_token} />} /> */}
+            {/* <Route exact path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
+            {/* <Route exact path="/login" component={(props) => <LoginForm {...props} get_token={(username, password) => this.get_token(username, password)} />} /> */}
+            {/* <Route exact path='/login' render={(props) => <LoginForm {...props} get_token={this.get_token} />} /> */}
+            {/* <Route exact path="/login" element={<LoginForm get_token={get_token} />} /> */}
+            {/* <Route exact path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
+            {/* <Route exact path="/login">
+              <LoginForm get_token={this.get_token} />
+            </Route> */}
+            {/* <Route path="/login" element={<LoginForm get_token={this.get_token} />} /> */}
+            {/* <Route exact path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
+            <Route exact path='/login' element={<LoginForm get_token={this.get_token} />} />  
             <Route element={NotFound404} />
           </Routes>
         </BrowserRouter>
