@@ -83,24 +83,13 @@ class App extends React.Component {
         </nav>
         </div>
           <Routes>
-            <Route exact path='/' element={<UserList users={this.state.users} /> } />
-            <Route exact path='/projects' element={<ProjectList projects={this.state.projects}  /> } />
-            <Route exact path='/todos' element={<TodoList todos={this.state.todos} /> } />
-            <Route exact path='/login' element={<LoginForm />} />
-            <Route path='/users' element={<Navigate to='/' />} />
-            <Route path="/users/:id" element={<UserTodoList todos={this.state.todos} /> } />
-            {/* <Route exact path="/login" element={<LoginForm get_token={this.get_token} />} /> */}
-            {/* <Route exact path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
-            {/* <Route exact path="/login" component={(props) => <LoginForm {...props} get_token={(username, password) => this.get_token(username, password)} />} /> */}
-            {/* <Route exact path='/login' render={(props) => <LoginForm {...props} get_token={this.get_token} />} /> */}
-            {/* <Route exact path="/login" element={<LoginForm get_token={get_token} />} /> */}
-            {/* <Route exact path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
-            {/* <Route exact path="/login">
-              <LoginForm get_token={this.get_token} />
-            </Route> */}
-            {/* <Route path="/login" element={<LoginForm get_token={this.get_token} />} /> */}
-            {/* <Route exact path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} /> */}
-            <Route exact path='/login' element={<LoginForm get_token={this.get_token} />} />  
+            <Route path='/' element={<UserList users={this.state.users} /> } Route />
+            <Route path='/projects' element={<ProjectList projects={this.state.projects}  /> } Route />
+            <Route path='/todos' element={<TodoList todos={this.state.todos} /> } Route />
+            <Route path='/users' element={<Navigate to='/' />} Route />
+            <Route path="/users/:id" element={<UserTodoList todos={this.state.todos} /> } Route />
+            <Route path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} Route />
+            <Route path='/login' element={<LoginForm get_token={this.get_token} />} Route />  
             <Route element={NotFound404} />
           </Routes>
         </BrowserRouter>
