@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -21,7 +21,9 @@ class TwentyPageNumberPagination(PageNumberPagination):
 
 class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
     # pagination_class = TenPageNumberPagination
+
 
     def get_serializer_class(self):
         if self.action == 'create':
