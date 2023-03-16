@@ -79,8 +79,10 @@ class App extends React.Component {
             {
               "users": response.data
           }
-        )}).catch(error => console.log(error))
-      this.setState({users: []})
+        )}).catch(error => {
+          console.log(error)
+          this.setState({users: []})
+        })
     
     axios.get('http://127.0.0.1:8000/api/projects/', {headers}).then(response => {
         const projects = response.data.results
@@ -88,8 +90,10 @@ class App extends React.Component {
             {
               "projects": response.data
           }
-        )}).catch(error => console.log(error))
-      this.setState({projects: []})
+        )}).catch(error => {
+          console.log(error)
+          this.setState({projects: []})
+        })
 
     axios.get('http://127.0.0.1:8000/api/todos/', {headers}).then(response => {
         const todos = response.data.results
@@ -97,8 +101,10 @@ class App extends React.Component {
             {
               "todos": response.data
           }
-        )}).catch(error => console.log(error))
-      this.setState({todos: []})
+        )}).catch(error => {
+          console.log(error)
+          this.setState({todos: []})
+        })
   }
 
   componentDidMount() {
