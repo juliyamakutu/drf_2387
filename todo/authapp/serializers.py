@@ -12,3 +12,5 @@ class CustomUserModelSerializer(HyperlinkedModelSerializer):
             'last_name',
             'email',
         )
+
+

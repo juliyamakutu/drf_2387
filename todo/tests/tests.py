@@ -105,4 +105,8 @@ class TestCustomUserViewSet(TestCase):
         self.assertEqual(user.email, 'dj@mail.ru')
         client.logout()
 
+class TestMath(APISimpleTestCase):
+    def test_sqrt(self):
+        import math
+        self.assertEqual(math.sqrt(4), 2)
 

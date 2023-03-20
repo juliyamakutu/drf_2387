@@ -34,6 +34,21 @@ class TodoCreateSerializer(serializers.ModelSerializer):
         )
 
 
+class TodoReadSerializerBase(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = (
+            'id',
+            'project',
+            'title',
+            'description',
+            'created_at',
+            'updated_at',
+            'created_by',
+            'completed',
+        )
+
+
 class ProjectReadSerializer(serializers.ModelSerializer):
     todos = TodoReadSerializer(many=True, read_only=True)
     users = CustomUserModelSerializer(many=True, read_only=True)
