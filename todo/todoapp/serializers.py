@@ -4,6 +4,18 @@ from authapp.serializers import CustomUserModelSerializer
 from .models import Todo, Project
 
 
+class TodoCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = (
+            'project',
+            'title',
+            'description',
+            'created_by',
+            'completed',
+        )
+
+
 class TodoReadSerializer(serializers.ModelSerializer):
     created_by = CustomUserModelSerializer(read_only=True)
     project = serializers.StringRelatedField(source='project.title')
@@ -22,30 +34,12 @@ class TodoReadSerializer(serializers.ModelSerializer):
         )
 
 
-class TodoCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Todo
-        fields = (
-            'project',
-            'title',
-            'description',
-            'created_by',
-            'completed',
-        )
-
-
 class TodoReadSerializerBase(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = (
-            'id',
-            'project',
             'title',
             'description',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'completed',
         )
 
 
