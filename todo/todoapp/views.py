@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -7,7 +9,7 @@ from todoapp.serializers import (
     TodoCreateSerializer,
     TodoReadSerializer,
     ProjectReadSerializer,
-    ProjectCreateSerializer,
+    ProjectCreateSerializer, TodoReadSerializerBase,
 )
 
 
@@ -45,6 +47,8 @@ class TodoModelViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create':
             return TodoCreateSerializer
+        elif self.request.version == '2.0':
+            return TodoReadSerializerBase
         return TodoReadSerializer
 
     def get_queryset(self):
