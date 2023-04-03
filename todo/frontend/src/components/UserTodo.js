@@ -15,7 +15,7 @@ const TodoItem = ({todo}) => {
 
 const UserTodoList = ({todos}) => {
     let { id } = useParams();
-    let filtered_todos = todos.filter((todo) => todo.created_by.id == id)
+    let filtered_todos = todos.filter((todo) => todo.created_by.id === id)
     return (
         <table>
             <tr>
