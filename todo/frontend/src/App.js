@@ -6,6 +6,7 @@ import UserList from './components/User.js';
 import ProjectList from './components/Project.js';
 import TodoList from './components/Todo.js';
 import UserTodoList from './components/UserTodo.js';
+import TodoForm from './components/TodoForm';
 import {BrowserRouter, Route, Link, Routes, Navigate} from 'react-router-dom';
 import LoginForm from './components/Auth.js';
 import Cookies from 'universal-cookie';
@@ -68,6 +69,26 @@ class App extends React.Component {
         headers['Authorization'] = 'Token ' + this.state.token
       }
       return headers
+  }
+
+  createTodo(title, created_by) {
+    const headers = this.get_headers()
+    const data = {title: title, created_by: created_by}
+    axios.post(`http://127.0.0.1:8000/api/todos/`, data, {headers, headers})
+      .then(response => {
+        let new_todo = response.data
+        const created_by = this.state.CustomeUser.filter((item) => item.id === new_todo.created_by)[0]
+        new_todo.created_by = created_by
+        this.setState({todos: [...this.state.todos, new_todo]})
+      }).catch(error => console.log(error))
+  }
+
+  deleteTodo(id) {
+      const headers = this.get_headers()
+      axios.delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers, headers})
+          .then(response => {
+          this.setState({todos: this.state.todos.filter((item)=>item.id !== id)})
+      }).catch(error => console.log(error))
   }
 
   load_data() {
@@ -142,10 +163,11 @@ class App extends React.Component {
           <Routes>
             <Route path='/' element={<UserList users={this.state.users} /> } Route />
             <Route path='/projects' element={<ProjectList projects={this.state.projects}  /> } Route />
-            <Route path='/todos' element={<TodoList todos={this.state.todos} /> } Route />
+            <Route path='/todos' element={<TodoList todos={this.state.todos} deleteTodo={(id)=>this.deleteTodo(id)}/> } Route />
             <Route path='/users' element={<Navigate to='/' />} Route />
             <Route path="/users/:id" element={<UserTodoList todos={this.state.todos} /> } Route />
             <Route path="/login" element={<LoginForm get_token={(username, password) => this.get_token(username, password)} />} Route /> 
+            <Route exact path='/todos/create' elenent={() => <TodoForm items={this.state.CustomeUsers} createTodo={(title, created_by) => this.createTodo(title, created_by)} />} />
             <Route element={NotFound404} />
           </Routes>
         </BrowserRouter>
